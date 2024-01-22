@@ -35,7 +35,7 @@
           <?php   
     include("pdo.php");
         // Affichage (SELECT) :
-        $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom");
+        $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom ORDER BY `id_fav` ASC;");
         $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
 
     ?> 
@@ -59,7 +59,7 @@
             <?php echo $favori['nom_dom'] ?>
             </td>
             <td class="text-center">
-              <button class = "px-2"><i class="fa-solid fa-pen-to-square "></i></button><button class = "px-2 text-red-600"><i class="fa-solid fa-trash"></i></button>
+              <button class = "px-2  hover:text-sky-600"><i class="fa-solid fa-pen-to-square "></i></button><button class = "px-2 text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
             </td>
         </tr>
         <?php
