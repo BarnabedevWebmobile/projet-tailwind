@@ -1,0 +1,11 @@
+.table_fav{
+    width: 100%;
+}
+table th, td{
+    border: solid 1px;
+    
+}
+header{
+    display: flex;
+    justify-content: center;
+}
