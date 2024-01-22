@@ -6,11 +6,11 @@
   <link href="./output.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/aa422d9bdc.js" crossorigin="anonymous"></script>
 </head>
-<body class = "dark:bg-slate-800 dark:text-white">
+<body class = "dark:bg-slate-900 dark:text-white">
   <header>
     <h1 class="text-3xl font-bold underline Table favoris text-center py-8">Table SQL des favoris</h1>
   </header>
-  <section class = "">
+  <section class = "w-full flex justify-center">
     <table class="w-5/6">
       <tr class="border-y-2">
           <th class = "py-2">
@@ -41,10 +41,8 @@
     ?> 
     <?php
     foreach($favoris as $favori){
-        
-    
     ?>
-        <tr class="border-y-2 py-2">
+        <tr class="border-y-2 py-2 odd:bg-slate-600 even:bg-slate-700 hover:bg-slate-400">
             <td class = "py-2">
                 <?php echo $favori['id_fav'] ?>
             </td>
@@ -61,7 +59,7 @@
             <?php echo $favori['nom_dom'] ?>
             </td>
             <td class="text-center">
-              <button class = "px-2"><i class="fa-solid fa-pen-to-square"></i></button><button class = "px-2"><i class="fa-solid fa-trash"></i></button>
+              <button class = "px-2"><i class="fa-solid fa-pen-to-square "></i></button><button class = "px-2 text-red-600"><i class="fa-solid fa-trash"></i></button>
             </td>
         </tr>
         <?php
@@ -69,5 +67,8 @@
         ?>
     </table>
   </section>
+  <footer>
+    <h2 class="text-center py-4">Design by berta@bretzeldesign</h2>
+  </footer>
 </body>
 </html>
