@@ -597,8 +597,8 @@ video {
   height: 1rem;
 }
 
-.w-3\/6 {
-  width: 50%;
+.h-full {
+  height: 100%;
 }
 
 .w-4 {

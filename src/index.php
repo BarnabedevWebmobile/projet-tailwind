@@ -137,7 +137,7 @@
     <?php
     foreach($favoris as $favori){
     ?>
-      <tr class="border-y-2 py-2 odd:bg-slate-600 even:bg-slate-700 hover:bg-slate-400">
+      <tr class="border-y-2 py-2 h-full odd:bg-slate-600 even:bg-slate-700 hover:bg-slate-400">
           <td class = "p-2 text-amber-400">
             <?php echo $favori['id_fav'] ?>
           </td>
