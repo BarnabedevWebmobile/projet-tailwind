@@ -166,10 +166,5 @@
     </table>
   </section>
   <?php include 'footer.php' ?>
-  <?php
-  echo '<pre>';
-  var_dump($_GET);
-  echo '</pre>';
-  ?>
 </body>
 </html>

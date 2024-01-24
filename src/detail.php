@@ -7,72 +7,56 @@
         </h1>
     </header>
     <?php
-        $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom WHERE id_fav=".$_GET['favori'].";");
+        $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom
+        INNER JOIN `cat_fav` ON favoris.id_fav=cat_fav.id_fav INNER JOIN `categorie` ON categorie.id_cat=cat_fav.id_cat
+        WHERE favoris.id_fav=".$_GET['favori']." LIMIT 1;");
         $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
     ?>
-    <section class = "w-full flex justify-center dark:text-white">
-        <table class="w-5/6">
-        <tr class="border-y-2">
-            <th class = "py-2">
-                id favoris
-            </th>
-            <th>
-                libellé
-            </th>
-            <th>
-                date ajout
-            </th>
-            <th>
-                liens
-            </th>
-            <th>
-                nom domaine
-            </th>
-            <th>
-                edition/supression
-            </th>
-        </tr>
-        
         <?php
         foreach($favoris as $favori){
         ?>
-            <tr class="border-y-2 py-2 odd:bg-slate-600 even:bg-slate-700 hover:bg-slate-400">
-                <td class = "p-2">
-                    <?php echo $favori['id_fav'] ?>
-                </td>
-                <td>
-                <?php echo $favori['libelle'] ?>
-                </td>
-                <td>
-                <?php echo $favori['date_creation'] ?>
-                </td>
-                <td>
-                    <a href="<?php echo $favori['url'] ?>"><?php echo $favori['url'] ?></a>
-                </td>
-                <td>
-                <?php echo $favori['nom_dom'] ?>
-                </td>
-                <td class="text-center">
-                <button class = "px-2  hover:text-sky-600"><i class="fa-solid fa-pen-to-square "></i></button><button class = "px-2 text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-                
+    <div class="border-y-2 py-2 bg-slate-400">
+        <h2 class = " text-center p-2 py-8">
+            <?php echo $favori['libelle'] ?>
+        </h2>
+        <p class = "py-4 text-center">
+            id du favoris : <?php echo $favori['id_fav'] ?>
+        </p>
+        <p class = "py-4 text-center">
+            date de création : <?php echo $favori['date_creation'] ?>
+        </p>
+        <p class = "py-4 text-center">
+            liens : <a href="<?php echo $favori['url'] ?>"><?php echo $favori['url'] ?></a>
+        </p>
+        <p class = "py-4 text-center">
+            domaine : <?php echo $favori['nom_dom'] ?>
+        </p>
+        <ul class = "py-4 text-center">
+            catégories : 
+            <?php
+            foreach($favoris as $favori){
+              ?>  
+                <li><?php echo $favori['nom_cat'] ?></li>
             <?php
             }
             ?>
-        </table>
-        
-    </section>
-    <div class = " w-full flex justify-center text-center "> 
-    <span class = "w-5/6 flex justify-center text-center border-b-2 bg-slate-600">
-        <p class = "w-3/6 "><?php echo $favori['description'] ?></p>
-    </span>
+            
+        </ul>
+        <p class = "py-4 text-center">
+            <?php echo $favori['description'] ?>
+        </p>
+
+        <p class="text-center">
+            <button class = "px-2  hover:text-sky-600"><i class="fa-solid fa-pen-to-square "></i></button><button class = "px-2 text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
+        </p>
     </div>
-    
+    <?php
+    }
+    ?>
+
+
       <?php
-  echo '<pre>';
-  var_dump($_GET);
-  echo '</pre>';
+include 'footer.php';
   ?>
     
 </body>
