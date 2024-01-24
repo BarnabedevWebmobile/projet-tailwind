@@ -42,6 +42,17 @@
         };
         ?>
       </select>
+      <select class="rounded-lg ml-2" name="order" id="order">
+        <option value="favoris.id_fav">favori</option>
+        <option value="libelle">libellé</option>
+        <option value="date_creation">date de création</option>
+        <option value="url">URL</option>
+        <option value="id_dom">domaine</option>
+      </select>
+      <select class="rounded-lg ml-2" name="by" id="by">
+        <option value="ASC">ascendant</option>
+        <option value="DESC">descendant</option>
+      </select>
       <div class="relative py-8">
           <div class="absolute inset-y-0 start-0 flex items-center  ps-3 pointer-events-none">
               <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -86,31 +97,32 @@
           // Affichage (SELECT) :
 
         if (isset($_GET['search']) && $_GET['search'] !== "" ){
-          $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom WHERE libelle LIKE '%".$_GET['search']."%' ORDER BY `id_fav` ASC ;");
+          $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom WHERE libelle LIKE '%".$_GET['search']."%' ORDER BY ".$_GET['order']." ".$_GET['by']." ;");
           $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
         }else{
           if(isset($_GET['categorie'],$_GET['domaine']) && $_GET['categorie'] !== "none" && $_GET['domaine'] !== "none"){
             $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `cat_fav` ON favoris.id_fav=cat_fav.id_fav 
             INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom 
             INNER JOIN `categorie` ON cat_fav.id_cat=categorie.id_cat 
-            WHERE categorie.id_cat=".$_GET['categorie']." AND domaine.id_dom=".$_GET['domaine']." LIMIT ".$_GET['show'].";");
+            WHERE categorie.id_cat=".$_GET['categorie']." AND domaine.id_dom=".$_GET['domaine']." 
+            ORDER BY favoris.".$_GET['order']." ".$_GET['by']." LIMIT ".$_GET['show'].";");
             $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
           }else{
             if(isset($_GET['domaine']) && $_GET['domaine'] !== "none" && $_GET['categorie'] == "none"){
               $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom 
-              WHERE domaine.id_dom=".$_GET['domaine']." ORDER BY `id_fav` ASC LIMIT ".$_GET['show'].";");
+              WHERE domaine.id_dom=".$_GET['domaine']." ORDER BY ".$_GET['order']." ".$_GET['by']." LIMIT ".$_GET['show'].";");
               $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
             }else{
               if(isset($_GET['categorie']) && $_GET['categorie'] !== "none" && $_GET['domaine'] == "none"){
                 $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `cat_fav` ON favoris.id_fav=cat_fav.id_fav 
                 INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom 
                 INNER JOIN `categorie` ON cat_fav.id_cat=categorie.id_cat 
-                WHERE categorie.id_cat=".$_GET['categorie']." LIMIT ".$_GET['show'].";");
+                WHERE categorie.id_cat=".$_GET['categorie']." ORDER BY ".$_GET['order']." ".$_GET['by']." LIMIT ".$_GET['show'].";");
                 $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
               }else{
                 if(isset($_GET['show'])){
                   $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom 
-                  ORDER BY `id_fav` ASC LIMIT ".$_GET['show'].";");
+                  ORDER BY favoris.".$_GET['order']." ".$_GET['by']." LIMIT ".$_GET['show'].";");
                   $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
                 }else{
                   $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom ORDER BY `id_fav` ASC ;");
