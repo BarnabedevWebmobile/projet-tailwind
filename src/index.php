@@ -85,7 +85,7 @@
           <?php   
           // Affichage (SELECT) :
 
-        if (isset($_GET['search'])){
+        if (isset($_GET['search']) && $_GET['search'] !== "" ){
           $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom WHERE libelle LIKE '%".$_GET['search']."%' ORDER BY `id_fav` ASC ;");
           $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
         }else{
