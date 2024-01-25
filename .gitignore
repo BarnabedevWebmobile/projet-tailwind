@@ -129,3 +129,6 @@ dist
 # composer ignore
 composer.phar
 /vendor/
+
+# ignore connect
+/src/connect.php
