@@ -1,6 +1,9 @@
+<!-- récupération du contenue du fichier head pour l'ajouter en haut de page -->
 <?php
     include 'head.php'
 ?>
+<!-- récupération du contenue du fichier head pour l'ajouter en haut de page -->
+
     <header>
         <h1 class="text-3xl font-bold underline Table favoris text-center py-8 dark:text-white">
             A Propos
@@ -8,15 +11,13 @@
     </header>
     <?php
         $result = $pdo->query("SELECT favoris.`id_fav`, `libelle`,`date_creation`,`url`,`nom_dom`,`description`,
-        GROUP_CONCAT(`nom_cat`) AS concat_cat
+        GROUP_CONCAT(`nom_cat` SEPARATOR \"|\") AS concat_cat
         FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom
         INNER JOIN `cat_fav` ON favoris.id_fav=cat_fav.id_fav INNER JOIN `categorie` ON categorie.id_cat=cat_fav.id_cat
-        WHERE favoris.id_fav=".$_GET['favori']." LIMIT 1;");
-        $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
+        WHERE favoris.id_fav=".$_GET['favori'].";");
+        $favori = $result->fetch(PDO::FETCH_ASSOC); 
     ?>
-        <?php
-        foreach($favoris as $favori){
-        ?>
+
     <div class="border-y-2 py-2 bg-slate-400">
         <h2 class = " text-center p-2 py-8">
             <?php echo $favori['libelle'] ?>
@@ -35,13 +36,9 @@
         </p>
         <ul class = "py-4 text-center">
             catégories : 
-            <?php
-            foreach($favoris as $favori){
-              ?>  
+
                 <li><?php echo $favori['concat_cat'] ?></li>
-            <?php
-            }
-            ?>
+
             
         </ul>
         <p class = "py-4 text-center">
@@ -52,14 +49,9 @@
             <button class = "px-2  hover:text-sky-600"><i class="fa-solid fa-pen-to-square "></i></button><button class = "px-2 text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
         </p>
     </div>
-    <?php
-    }
-    ?>
+
 
 
       <?php
-include 'footer.php';
-  ?>
-    
-</body>
-</html>
+    include 'footer.php';
+    ?>

@@ -593,10 +593,6 @@ video {
   display: table;
 }
 
-.hidden {
-  display: none;
-}
-
 .h-4 {
   height: 1rem;
 }
@@ -838,12 +834,6 @@ video {
 .focus\:ring-blue-500:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
-}
-
-@media (min-width: 640px) {
-  .sm\:inline-block {
-    display: inline-block;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
