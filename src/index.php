@@ -70,26 +70,20 @@
   <section class = "w-full flex justify-center dark:text-white">
     <table class="w-5/6">
       <tr class="border-y-2">
-          <th class = "py-2">
+          <th class = " py-2">
               id favoris
           </th>
-          <th>
+          <th class = "">
               libellé
           </th>
-          <th>
+          <th class = " ">
               date ajout
           </th>
-          <th>
-              liens
-          </th>
-          <th>
+          <th class = " text-center ">
               nom domaine
           </th>
-          <th>
-            edition/supression
-          </th>
-          <th>
-            visiter
+          <th class = "  text-center ">
+            actions
           </th>
       </tr>
       <!-- zone de filtrage -->
@@ -138,27 +132,25 @@
     foreach($favoris as $favori){
     ?>
       <tr class="border-y-2 py-2 h-full odd:bg-slate-600 even:bg-slate-700 hover:bg-slate-400">
-          <td class = "p-2 text-amber-400">
+          <td class = "p-2  text-amber-400">
             <?php echo $favori['id_fav'] ?>
           </td>
           <td>
             <?php echo $favori['libelle'] ?>
           </td>
-          <td>
+          <td class = "">
             <?php echo $favori['date_creation'] ?>
           </td>
-          <td>
-            <a href="<?php echo $favori['url'] ?>">link</a>
-          </td>
-          <td>
+          <td class = "">
             <?php echo $favori['nom_dom'] ?>
           </td>
-          <td class="text-center">
-            <button class = "px-2  hover:text-sky-600"><i class="fa-solid fa-pen-to-square "></i></button><button class = "px-2 text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
+          <td class="text-center ">
+          <button class = "px-2 text-blue-400 hover:text-violet-400"><a href="<?php echo $favori['url'] ?>" target="_blank"><i class="fa-solid fa-link"></i></A</button>
+            <button class = "px-2 text-lime-600 hover:text-lime-400"><a href="detail.php?favori=<?php echo $favori['id_fav']?>"><i class="fa-solid fa-eye"></i></A</button>
+            <button class = "px-2  hover:text-sky-600"><i class="fa-solid fa-pen-to-square "></i></button>
+            <button class = "px-2 text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
           </td>
-          <td class="text-center">
-            <button class = "px-2 rounded hover:bg-lime-400 bg-lime-600"><a href="detail.php?favori=<?php echo $favori['id_fav']?>">plus d'information</a></button>
-          </td>
+        
       </tr>
       <?php
       }

@@ -7,7 +7,9 @@
         </h1>
     </header>
     <?php
-        $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom
+        $result = $pdo->query("SELECT favoris.`id_fav`, `libelle`,`date_creation`,`url`,`nom_dom`,`description`,
+        GROUP_CONCAT(`nom_cat`) AS concat_cat
+        FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom
         INNER JOIN `cat_fav` ON favoris.id_fav=cat_fav.id_fav INNER JOIN `categorie` ON categorie.id_cat=cat_fav.id_cat
         WHERE favoris.id_fav=".$_GET['favori']." LIMIT 1;");
         $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
@@ -36,7 +38,7 @@
             <?php
             foreach($favoris as $favori){
               ?>  
-                <li><?php echo $favori['nom_cat'] ?></li>
+                <li><?php echo $favori['concat_cat'] ?></li>
             <?php
             }
             ?>
