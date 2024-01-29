@@ -577,6 +577,19 @@ video {
   inset-inline-start: 0px;
 }
 
+.m-10 {
+  margin: 2.5rem;
+}
+
+.m-6 {
+  margin: 1.5rem;
+}
+
+.my-16 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -611,6 +624,14 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .items-center {
@@ -696,6 +717,11 @@ video {
   padding-bottom: 2rem;
 }
 
+.py-80 {
+  padding-top: 20rem;
+  padding-bottom: 20rem;
+}
+
 .ps-10 {
   padding-inline-start: 2.5rem;
 }
@@ -708,6 +734,11 @@ video {
   text-align: center;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -716,6 +747,11 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -805,9 +841,9 @@ video {
   color: rgb(2 132 199 / var(--tw-text-opacity));
 }
 
-.hover\:text-violet-400:hover {
+.hover\:text-violet-800:hover {
   --tw-text-opacity: 1;
-  color: rgb(167 139 250 / var(--tw-text-opacity));
+  color: rgb(91 33 182 / var(--tw-text-opacity));
 }
 
 .focus\:border-blue-500:focus {

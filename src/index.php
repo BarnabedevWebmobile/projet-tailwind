@@ -114,6 +114,10 @@
   </section>
   <!-- section de mise en forme du formulaire -->
 
+  <section class= 'flex justify-center'>
+    <button class='my-16  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'><a href="create.php"><h2 class = ' dark:text-white'>add a bookmark</h2></a></button>
+  </section>
+
   <!-- section prenant l'ensemble de la table -->
   <section class = "w-full flex justify-center dark:text-white"> 
     <!-- création de la table -->
@@ -241,7 +245,7 @@
             <button class = "px-2  hover:text-sky-600"><i class="fa-solid fa-pen-to-square "></i></button>
             
             <!-- pictogramme de la supression du favoris -->
-            <button class = "px-2 text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
+            <button class = "px-2 text-red-600 hover:text-red-800"><a href="confirm.php?favori=<?php echo $favori['id_fav'] ?>"><i class="fa-solid fa-trash"></i></a></button>
           </td>
       </tr>
 
