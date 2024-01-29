@@ -581,6 +581,10 @@ video {
   margin: 2.5rem;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .m-6 {
   margin: 1.5rem;
 }
@@ -627,10 +631,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.w-2\/6 {
-  width: 33.333333%;
 }
 
 .w-4 {
@@ -893,6 +893,12 @@ video {
 .focus\:ring-blue-500:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
+}
+
+@media (min-width: 768px) {
+  .md\:w-2\/6 {
+    width: 33.333333%;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
