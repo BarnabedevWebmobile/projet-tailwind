@@ -1,1 +1,3 @@
-<script src="https://kit.fontawesome.com/aa422d9bdc.js" crossorigin="anonymous"></script>
+function alerte(){
+    alert('champs obligatoire non rempli')
+}

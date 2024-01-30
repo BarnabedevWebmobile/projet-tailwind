@@ -84,29 +84,26 @@
         </form>
     </section>
     <?php
+    $today = date("Y-m-d");
+    ?>
+    <?php
     if(
         isset($_POST['libelle'])
         && isset($_POST['domaine'])
         && isset($_POST['link']) 
-        && count($_POST['cats'])!== 0
+        && (isset($_POST['cats']) && count($_POST['cats'])!== 0)
         && strlen($_POST['libelle']) < 300
         && strlen($_POST['link']) < 1000 ){
-            
-        
-    }else{
-        if(
-            !empty($_POST['cats'])
-        )
-        echo "Parametre non rempli";
-    };
-    echo '<pre>';
-    var_dump($_POST['cats']);
-    echo '</pre>';
-?>
-    <?php
 
-    $today = date("Y-m-d");
-    ?>
+        
+            header('Location: index.php');
+            exit();
+    }else{
+
+    };
+
+?>
+    
 <?php
     include 'footer.php'
 ?>
