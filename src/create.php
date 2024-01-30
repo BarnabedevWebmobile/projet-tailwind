@@ -1,7 +1,54 @@
 <?php
     include 'head.php';
 ?>
+    <?php
+    $index = 0;
+    if(
+        isset($_POST['libelle'])
+        && isset($_POST['domaine'])
+        && isset($_POST['link']) 
+        && (isset($_POST['cats']) && count($_POST['cats'])!== 0)
+        && strlen($_POST['description']) == 0
+        && strlen($_POST['libelle']) < 300
+        && strlen($_POST['link']) < 1000 
+        ){
+             $result = $pdo->query("INSERT INTO `favoris` (`id_fav`, `libelle`, `date_creation`, `url`, `id_dom`, `description`) VALUES 
+             ('[value-1]','".htmlspecialchars($_POST['libelle'])."', NOW() ,'".htmlspecialchars($_POST['link'])."',".htmlspecialchars($_POST['domaine']).",'description');");
+             $favori = $result->fetch(PDO::FETCH_ASSOC);
 
+            $dernier_id = $pdo -> lastInsertId();
+            foreach($_POST['cats'] as $_POST['cat']){
+                 $result2 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) VALUES (".$dernier_id.",".htmlspecialchars($_POST['cat']).");");
+                 $catfav = $result2->fetch(PDO::FETCH_ASSOC);
+            };
+             header('Location: index.php');
+             exit();
+    }else{
+        if( isset($_POST['libelle'])
+        && isset($_POST['domaine'])
+        && isset($_POST['link']) 
+        && (isset($_POST['cats']) && count($_POST['cats'])!== 0)
+        && strlen($_POST['description']) !== 0
+        && strlen($_POST['libelle']) < 300
+        && strlen($_POST['link']) < 1000 ){
+
+            $result = $pdo->query("INSERT INTO `favoris` (`id_fav`, `libelle`, `date_creation`, `url`, `id_dom`, `description`) VALUES 
+            ('[value-1]','".htmlspecialchars($_POST['libelle'])."', NOW() ,'".htmlspecialchars($_POST['link'])."',".htmlspecialchars($_POST['domaine']).",'".htmlspecialchars($_POST['description'])."');");
+            $favori = $result->fetch(PDO::FETCH_ASSOC);
+            $dernier_id = $pdo -> lastInsertId();
+
+            foreach($_POST['cats'] as $_POST['cat']){
+             $result2 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) VALUES (".$dernier_id.",".htmlspecialchars($_POST['cat']).");");
+             $catfav = $result2->fetch(PDO::FETCH_ASSOC);
+            };
+            header('Location: index.php');
+            exit();
+        }else{
+
+        }
+
+    };    
+?>
 <header class = 'flex justify-center'>
     <h1 class = 'dark:text-white text-2xl'>Créer un nouveau favoris</h1>
 </header>
@@ -81,54 +128,7 @@
             
         </form>
     </section>
-    <?php
-    $index = 0;
-    if(
-        isset($_POST['libelle'])
-        && isset($_POST['domaine'])
-        && isset($_POST['link']) 
-        && (isset($_POST['cats']) && count($_POST['cats'])!== 0)
-        && strlen($_POST['description']) == 0
-        && strlen($_POST['libelle']) < 300
-        && strlen($_POST['link']) < 1000 
-        ){
-             $result = $pdo->query("INSERT INTO `favoris` (`id_fav`, `libelle`, `date_creation`, `url`, `id_dom`, `description`) VALUES 
-             ('[value-1]','".htmlspecialchars($_POST['libelle'])."', NOW() ,'".htmlspecialchars($_POST['link'])."',".htmlspecialchars($_POST['domaine']).",'description');");
-             $favori = $result->fetch(PDO::FETCH_ASSOC);
 
-            $dernier_id = $pdo -> lastInsertId();
-            foreach($_POST['cats'] as $_POST['cat']){
-                 $result2 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) VALUES (".$dernier_id.",".htmlspecialchars($_POST['cat']).");");
-                 $catfav = $result2->fetch(PDO::FETCH_ASSOC);
-            };
-             header('Location: index.php');
-             exit();
-    }else{
-        if( isset($_POST['libelle'])
-        && isset($_POST['domaine'])
-        && isset($_POST['link']) 
-        && (isset($_POST['cats']) && count($_POST['cats'])!== 0)
-        && strlen($_POST['description']) !== 0
-        && strlen($_POST['libelle']) < 300
-        && strlen($_POST['link']) < 1000 ){
-
-            $result = $pdo->query("INSERT INTO `favoris` (`id_fav`, `libelle`, `date_creation`, `url`, `id_dom`, `description`) VALUES 
-            ('[value-1]','".htmlspecialchars($_POST['libelle'])."', NOW() ,'".htmlspecialchars($_POST['link'])."',".htmlspecialchars($_POST['domaine']).",'".htmlspecialchars($_POST['description'])."');");
-            $favori = $result->fetch(PDO::FETCH_ASSOC);
-            $dernier_id = $pdo -> lastInsertId();
-
-            foreach($_POST['cats'] as $_POST['cat']){
-             $result2 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) VALUES (".$dernier_id.",".htmlspecialchars($_POST['cat']).");");
-             $catfav = $result2->fetch(PDO::FETCH_ASSOC);
-            };
-            header('Location: index.php');
-            exit();
-        }else{
-
-        }
-
-    };    
-?>
     
 <?php
     include 'footer.php'
