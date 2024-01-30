@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 29 jan. 2024 à 10:41
+-- Généré le : lun. 29 jan. 2024 à 11:55
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -278,7 +278,7 @@ ALTER TABLE `favoris`
 --
 ALTER TABLE `cat_fav`
   ADD CONSTRAINT `fk_id_cat` FOREIGN KEY (`id_cat`) REFERENCES `categorie` (`id_cat`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_id_fav` FOREIGN KEY (`id_fav`) REFERENCES `favoris` (`id_fav`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_fav` FOREIGN KEY (`id_fav`) REFERENCES `favoris` (`id_fav`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `favoris`
