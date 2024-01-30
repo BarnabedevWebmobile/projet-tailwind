@@ -121,6 +121,8 @@
   <!-- section prenant l'ensemble de la table -->
   <section class = "w-full flex justify-center dark:text-white"> 
     <!-- création de la table -->
+
+    
     <table class="w-5/6"> <!-- table prenant 5/6 de la page -->
       
     <!-- création de la ligne contenant le nom de chaque colone -->
@@ -160,8 +162,8 @@
             $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `cat_fav` ON favoris.id_fav=cat_fav.id_fav 
             INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom 
             INNER JOIN `categorie` ON cat_fav.id_cat=categorie.id_cat 
-            WHERE categorie.id_cat=".$_GET['categorie']." AND domaine.id_dom=".$_GET['domaine']." 
-            ORDER BY favoris.".$_GET['order']." ".$_GET['by']." LIMIT ".$_GET['show'].";");
+            WHERE categorie.id_cat=".htmlspecialchars($_GET['categorie'])." AND domaine.id_dom=".htmlspecialchars($_GET['domaine'])." 
+            ORDER BY favoris.".htmlspecialchars($_GET['order'])." ".htmlspecialchars($_GET['by'])." LIMIT ".htmlspecialchars($_GET['show']).";");
             $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
           }else{
 
@@ -169,7 +171,7 @@
 
             if(isset($_GET['domaine']) && $_GET['domaine'] !== "none" && $_GET['categorie'] == "none"){
               $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom 
-              WHERE domaine.id_dom=".$_GET['domaine']." ORDER BY favoris.".$_GET['order']." ".$_GET['by']." LIMIT ".$_GET['show'].";");
+              WHERE domaine.id_dom=".$_GET['domaine']." ORDER BY favoris.".htmlspecialchars($_GET['order'])." ".htmlspecialchars($_GET['by'])." LIMIT ".htmlspecialchars($_GET['show']).";");
               $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
             }else{
 
@@ -179,7 +181,7 @@
                 $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `cat_fav` ON favoris.id_fav=cat_fav.id_fav 
                 INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom 
                 INNER JOIN `categorie` ON cat_fav.id_cat=categorie.id_cat 
-                WHERE categorie.id_cat=".$_GET['categorie']." ORDER BY favoris.".$_GET['order']." ".$_GET['by']." LIMIT ".$_GET['show'].";");
+                WHERE categorie.id_cat=".htmlspecialchars($_GET['categorie'])." ORDER BY favoris.".htmlspecialchars($_GET['order'])." ".htmlspecialchars($_GET['by'])." LIMIT ".htmlspecialchars($_GET['show']).";");
                 $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
               }else{
 
@@ -187,7 +189,7 @@
 
                 if(isset($_GET['show'])){
                   $result = $pdo->query("SELECT * FROM `favoris` INNER JOIN `domaine` ON favoris.id_dom=domaine.id_dom 
-                  ORDER BY favoris.".$_GET['order']." ".$_GET['by']." LIMIT ".$_GET['show'].";");
+                  ORDER BY favoris.".htmlspecialchars($_GET['order'])." ".htmlspecialchars($_GET['by'])." LIMIT ".htmlspecialchars($_GET['show']).";");
                   $favoris = $result->fetchAll(PDO::FETCH_ASSOC); 
                 }else{
 
