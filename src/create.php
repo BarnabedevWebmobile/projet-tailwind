@@ -2,17 +2,7 @@
     include 'head.php';
 ?>
 
-<?php
-    if(isset($_POST['libelle'],$_POST['domaine'],
-    $_POST['link']) && count($_POST['cats'])!== 0){
-        
-    }else{
-        echo "Parametre non rempli";
-    };
-    echo '<pre>';
-    var_dump($_POST['cats']);
-    echo '</pre>';
-?>
+
 
 <header class = 'flex justify-center'>
     <h1 class = 'dark:text-white text-2xl'>Créer un nouveau favoris</h1>
@@ -67,6 +57,7 @@
                     foreach($categories as $categorie){?>
 
                         <span>
+
                             <input class = "m-2" type="checkbox" name="cats[cat<?php echo $categorie['id_cat'] ?>]" 
                             id="<?php echo $categorie['nom_cat'] ?>" value = "<?php echo $categorie['id_cat'] ?>">
                             <label class = "m-2" for="<?php echo $categorie['nom_cat'] ?>"><?php echo $categorie['nom_cat'] ?></label>
@@ -92,7 +83,26 @@
             
         </form>
     </section>
-
+    <?php
+    if(
+        isset($_POST['libelle'])
+        && isset($_POST['domaine'])
+        && isset($_POST['link']) 
+        && count($_POST['cats'])!== 0
+        && strlen($_POST['libelle']) < 300
+        && strlen($_POST['link']) < 1000 ){
+            
+        
+    }else{
+        if(
+            !empty($_POST['cats'])
+        )
+        echo "Parametre non rempli";
+    };
+    echo '<pre>';
+    var_dump($_POST['cats']);
+    echo '</pre>';
+?>
     <?php
 
     $today = date("Y-m-d");
