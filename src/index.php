@@ -252,7 +252,7 @@
             <button class = "px-2 text-lime-600 hover:text-lime-400"><a href="detail.php?favori=<?php echo $favori['id_fav']?>"><i class="fa-solid fa-eye"></i></A</button>
             
             <!-- pictogramme de l'édition du favoris -->
-            <button class = "px-2  hover:text-sky-600"><i class="fa-solid fa-pen-to-square "></i></button>
+            <button class = "px-2  hover:text-sky-600"><a href="update.php?favori=<?php echo $favori['id_fav']?>"><i class="fa-solid fa-pen-to-square "></i></a></button>
             
             <!-- pictogramme de la supression du favoris -->
             <button class = "px-2 text-red-600 hover:text-red-800"><a href="confirm.php?favori=<?php echo $favori['id_fav'] ?>">
