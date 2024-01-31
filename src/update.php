@@ -5,39 +5,64 @@
 $fav=$_GET['favori'];
 ?>
 <?php
-    // if(count($_POST)>0){
-        // $libelle = htmlspecialchars($_POST['libelle']);
-        // $cats = array(htmlspecialchars($_POST['cats']));
-        // $desc = htmlspecialchars($_POST['description']);
-        // $lien = htmlspecialchars($_POST['link']);
-        // $dom = htmlspecialchars($_POST['domaine']);
+    if(count($_POST)>0){
+        $libelle = htmlspecialchars($_POST['libelle']);
+        $cats = array(($_POST['cats']));
+        $desc = htmlspecialchars($_POST['description']);
+        $lien = htmlspecialchars($_POST['link']);
+        $dom = htmlspecialchars($_POST['domaine']);
 
-    //     foreach($cats as $cat){
-    //         $result2 = $pdo->prepare("UPDATE `cat_fav`SET `id_cat`=:cats;");
-    //         $catfav = $result2->execute(array(
-    //             'cats' => $cat
+        if(!empty($cats)){
 
-    //         ));
-    //     };
+                ?><script> alert("pas de catégorie attribué")</script>;<?php
+            }else{
+                foreach($cats as $cat){
+                    $result2 = $pdo->prepare("DELETE FROM `cat_fav` WHERE id_fav=".$fav.";");
+                    $catfav = $result2->execute(array(
+                        ':cats' => $cat
+                    ));
+                    $result3 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) 
+                    VALUES (".$fav.",".$cat.");");
+                    $catfav = $result3->execute(array(
+                        ':cats' => $cat
+                    ));
+            }; 
+        }
 
-    //     $result = $pdo->prepare("UPDATE `favoris` SET `libelle`= :lib, `date_creation` = NOW(), 
-    //     `url`=:link, id_dom=:dom, `description`=:summary WHERE id_fav=".$fav."");
-    //     $result->execute(array(
-    //         'lib' => $libelle,
+        if(!empty($libelle)||!empty($lien) || !empty($dom) ||!empty($desc)){
+            $result = $pdo->prepare("UPDATE `favoris` SET `libelle`= :lib, `date_creation` = NOW(), 
+            `url`=:link, id_dom=:dom, `description`=:summary WHERE id_fav=:fav");
+            $result->execute(array(
+                ':lib' => $libelle,
+    
+                ':link' => $lien,
+    
+                ':dom' =>$dom,
+    
+                ':fav' =>$fav,
+    
+                'summary' =>$desc,
+            ));
 
-    //         'link' => $lien,
-
-    //         'dom' =>$dom,
-
-    //         'summary' =>$desc,
-    //     ));
-    // }
+        }
+        
+    }
 ?>
     <header>
-        <h1 class="text-3xl font-bold underline Table favoris text-center py-8 dark:text-white">
+        <h1 class="text-3xl font-bold underline Table text-center py-8 dark:text-white">
            Modifier votre favori
         </h1>
     </header>
+
+    <section class = "w-full flex justify-center my-10">
+        <a href="index.php">
+            <button class = "dark:text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+            focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
+            dark:focus:ring-blue-800">HOME</button>
+        </a>
+    </section>
+
+
 
     <?php
         $result = $pdo->query("SELECT favoris.`id_fav`, `libelle`,`date_creation`,`url`,`nom_dom`,`description`,
@@ -162,11 +187,14 @@ $fav=$_GET['favori'];
 
         </form>
     </section>
+    <div class = " dark:text-white">
     <?php
-    echo '<pre>';
-    var_dump($_POST);
-    echo '</pre>';
+        echo '<pre>';
+        var_dump($_POST);
+        echo '</pre>';
     ?>
+    </div>
+
 
 <?php
     include 'footer.php'
