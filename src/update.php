@@ -12,24 +12,29 @@ $fav=$_GET['favori'];
         $lien = htmlspecialchars($_POST['link']);
         $dom = htmlspecialchars($_POST['domaine']);
 
-        if(!empty($cats)){
+        if(is_array($cats)){
 
                 ?><script> alert("pas de catégorie attribué")</script>;<?php
             }else{
                 foreach($cats as $cat){
-                    $result2 = $pdo->prepare("DELETE FROM `cat_fav` WHERE id_fav=".$fav.";");
+                    $result2 = $pdo->prepare("DELETE FROM `cat_fav` WHERE id_fav=:fav;");
                     $catfav = $result2->execute(array(
+                        ':fav' => $fav,
                         ':cats' => $cat
                     ));
                     $result3 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) 
                     VALUES (".$fav.",".$cat.");");
                     $catfav = $result3->execute(array(
+                        ':fav' => $fav,
                         ':cats' => $cat
                     ));
             }; 
         }
 
-        if(!empty($libelle)||!empty($lien) || !empty($dom) ||!empty($desc)){
+        if(is_array($libelle)||is_array($lien) 
+        || is_array($dom) ||is_array($desc)){
+            ?><script> alert("champs non rempli")</script>;<?php
+        }else{
             $result = $pdo->prepare("UPDATE `favoris` SET `libelle`= :lib, `date_creation` = NOW(), 
             `url`=:link, id_dom=:dom, `description`=:summary WHERE id_fav=:fav");
             $result->execute(array(
@@ -190,7 +195,7 @@ $fav=$_GET['favori'];
     <div class = " dark:text-white">
     <?php
         echo '<pre>';
-        var_dump($_POST);
+        var_dump($cats);
         echo '</pre>';
     ?>
     </div>
