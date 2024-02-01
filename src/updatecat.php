@@ -13,8 +13,6 @@
                 ':lib' => $libelle,
     
                 ':idcat' =>$idcat,
-                
-
             ));
             header('Location: categories.php');
             exit();
