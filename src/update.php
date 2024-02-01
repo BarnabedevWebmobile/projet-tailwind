@@ -14,8 +14,8 @@ $fav=$_GET['favori'];
         $lien = htmlspecialchars($_POST['link']);
         $dom = htmlspecialchars($_POST['domaine']);
 
-        if(is_array($libelle)||is_array($lien) 
-        || is_array($dom) ||is_array($desc)){
+        if(strlen($libelle) !== 0||strlen($lien)!==0
+        || is_numeric($dom) ||strlen($desc) !== 0){
             ?><script> alert("champs non rempli")</script>;<?php
         }else{
             $result = $pdo->prepare("UPDATE `favoris` SET `libelle`= :lib, `date_creation` = NOW(), 

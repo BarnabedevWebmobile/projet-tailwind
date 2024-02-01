@@ -1,8 +1,11 @@
+<!--inclusion du head de la page-->
 <?php
     include 'head.php';
 ?>
-    <?php
+<!--inclusion du head de la page-->
 
+    <?php
+    // vérification supplémentaire du remplissage de champs
     if(
         isset($_POST['libelle'])
         && isset($_POST['domaine'])
@@ -12,18 +15,34 @@
         && strlen($_POST['libelle']) < 300
         && strlen($_POST['link']) < 1000 
         ){
-             $result = $pdo->query("INSERT INTO `favoris` (`id_fav`, `libelle`, `date_creation`, `url`, `id_dom`, `description`) VALUES 
-             ('[value-1]','".htmlspecialchars($_POST['libelle'])."', NOW() ,'".htmlspecialchars($_POST['link'])."',".htmlspecialchars($_POST['domaine']).",'description');");
-             $favori = $result->fetch(PDO::FETCH_ASSOC);
+    // vérification supplémentaire du remplissage de champs
 
-            $dernier_id = $pdo -> lastInsertId();
-            foreach($_POST['cats'] as $_POST['cat']){
-                 $result2 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) VALUES (".$dernier_id.",".htmlspecialchars($_POST['cat']).");");
-                 $catfav = $result2->fetch(PDO::FETCH_ASSOC);
-            };
-             header('Location: index.php');
-             exit();
+    //  cas ou la personne n'a pas remplis le champ description
+
+        // insertion d'une nouvelle ligne dans la tables favoris
+        $result = $pdo->query("INSERT INTO `favoris` (`id_fav`, `libelle`, `date_creation`, `url`, `id_dom`, `description`) VALUES 
+        ('[value-1]','".htmlspecialchars($_POST['libelle'])."', NOW() ,'".htmlspecialchars($_POST['link'])."',".htmlspecialchars($_POST['domaine']).",'description');");
+        $favori = $result->fetch(PDO::FETCH_ASSOC);
+        // insertion d'une nouvelle ligne dans la tables favoris
+
+        // insertion d'une nouvelle ligne dans la tables cat_fav
+        $dernier_id = $pdo -> lastInsertId();
+        foreach($_POST['cats'] as $_POST['cat']){
+                $result2 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) VALUES (".$dernier_id.",".htmlspecialchars($_POST['cat']).");");
+                $catfav = $result2->fetch(PDO::FETCH_ASSOC);
+        };
+        // insertion d'une nouvelle ligne dans la tables cat_fav
+
+        // redirection a l'index
+        header('Location: index.php');
+        exit();
+        // redirection a l'index
+
+    //  cas ou la personne n'a pas remplis le champ description
     }else{
+    //  cas ou la personne a remplis le champ description
+
+        // vérification supplémentaire du remplissage de champs
         if( isset($_POST['libelle'])
         && isset($_POST['domaine'])
         && isset($_POST['link']) 
@@ -31,28 +50,45 @@
         && strlen($_POST['description']) !== 0
         && strlen($_POST['libelle']) < 300
         && strlen($_POST['link']) < 1000 ){
+        // vérification supplémentaire du remplissage de champs
 
+            // insertion d'une nouvelle ligne dans la tables favoris
             $result = $pdo->query("INSERT INTO `favoris` (`id_fav`, `libelle`, `date_creation`, `url`, `id_dom`, `description`) VALUES 
             ('[value-1]','".htmlspecialchars($_POST['libelle'])."', NOW() ,'".htmlspecialchars($_POST['link'])."',".htmlspecialchars($_POST['domaine']).",'".htmlspecialchars($_POST['description'])."');");
             $favori = $result->fetch(PDO::FETCH_ASSOC);
             $dernier_id = $pdo -> lastInsertId();
+            // insertion d'une nouvelle ligne dans la tables favoris
 
+            // insertion d'une nouvelle ligne dans la tables cat_fav
             foreach($_POST['cats'] as $_POST['cat']){
              $result2 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) VALUES (".$dernier_id.",".htmlspecialchars($_POST['cat']).");");
              $catfav = $result2->fetch(PDO::FETCH_ASSOC);
             };
+            // insertion d'une nouvelle ligne dans la tables cat_fav
+
+            // redirection a l'index
             header('Location: index.php');
             exit();
+            // redirection a l'index
+
+        //  cas ou la personne a remplis le champ description
         }else{
 
         }
 
     };    
 ?>
+
+<!-- titre de la page -->
 <header class = 'flex justify-center'>
     <h1 class = 'dark:text-white text-2xl'>Créer un nouveau favoris</h1>
 </header>
+<!-- titre de la page -->
+
+
     <section class = "w-full flex justify-center my-10">
+
+
         <form class=" w-full md:w-2/6" action="" method="POST">
 
             <div class ="my-12 px-4 flex justify-center">
@@ -92,12 +128,17 @@
                 </span>
             </div>
             <div class = " my-12 px-4  dark:text-white">
+
+                <!-- récupération de la table des catégories -->
                 <?php
                     $data = $pdo->query("SELECT * FROM `categorie` ORDER BY `id_cat` ASC;");
                     $categories = $data->fetchAll(PDO::FETCH_ASSOC);
                 ?>
+                <!-- récupération de la table des catégories -->
+                
                 <h3 class = "text-center py-2">catégorie</h3>
                 <span class = " flex justify-center flex-wrap">
+                    <!-- création auto des checkbox par catégories -->
                     <?php
                     foreach($categories as $categorie){?>
 
@@ -110,6 +151,7 @@
                     <?php
                     };
                     ?> 
+                    <!-- création auto des checkbox par catégories -->
                 </span>
 
             </div>
@@ -129,7 +171,8 @@
         </form>
     </section>
 
-    
+<!--inclusion du footer de la page-->
 <?php
     include 'footer.php'
 ?>
+<!--inclusion du footer de la page-->
