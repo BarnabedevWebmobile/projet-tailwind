@@ -2,7 +2,7 @@
     include 'head.php';
 ?>
     <?php
-    $index = 0;
+
     if(
         isset($_POST['libelle'])
         && isset($_POST['domaine'])

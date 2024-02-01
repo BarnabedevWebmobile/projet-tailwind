@@ -1,8 +1,10 @@
 <?php
     include 'pdo.php';
-
-    $result = $pdo->query("DELETE FROM `favoris` WHERE id_fav= ".$_GET['favori'].";");
-    $favori = $result->fetch(PDO::FETCH_ASSOC);
+    $fav=$_GET['favori'];
+    $result = $pdo->prepare("DELETE FROM `favoris` WHERE id_fav=:fav ;");
+    $favori = $result->execute(array(
+        ':fav' => $fav,
+    ));
     header('Location: index.php');
     exit();
     
