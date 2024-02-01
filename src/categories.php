@@ -1,6 +1,10 @@
+<!--inclusion du head de la page-->
 <?php
     include 'head.php'
 ?>
+<!--inclusion du head de la page-->
+
+<!-- création d'une nouvelle catégorie -->
     <?php
     if(count($_POST)>0){
     $libelle = htmlspecialchars($_POST['libelle']);
@@ -17,10 +21,11 @@
         }
     }
     ?>
+<!-- création d'une nouvelle catégorie -->
 
 <header>
     <h1 class="text-3xl font-bold underline Table favoris text-center py-8 dark:text-white">
-        catégories
+        liste des catégories
     </h1>
 </header>
     <section class = "w-full flex justify-center dark:text-white">
