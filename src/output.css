@@ -642,14 +642,6 @@ video {
   width: 50%;
 }
 
-.w-2\/6 {
-  width: 33.333333%;
-}
-
-.w-3\/6 {
-  width: 50%;
-}
-
 .w-4 {
   width: 1rem;
 }
@@ -910,6 +902,16 @@ video {
 .focus\:ring-blue-500:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
+}
+
+@media (min-width: 640px) {
+  .sm\:w-2\/6 {
+    width: 33.333333%;
+  }
+
+  .sm\:w-3\/6 {
+    width: 50%;
+  }
 }
 
 @media (min-width: 768px) {

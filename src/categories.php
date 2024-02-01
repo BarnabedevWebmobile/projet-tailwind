@@ -8,7 +8,7 @@
     </h1>
 </header>
     <section class = "w-full flex justify-center dark:text-white">
-        <table class="w-2/6">
+        <table class="w-full sm:w-2/6">
             <tr class="border-y-2">
                 <th class = " py-2  w-1/2">
                     id catégorie
@@ -35,13 +35,10 @@
                 <?php echo $categorie['id_cat'] ?>
                 </td>
                 <td class = " py-2 text-center flex justify-center">
-                    <form action="" method="post" class = "flex justify-center">
-                        <input type="text" name="libelle" id="lib" required size="50" class = " block w-3/6 p-2 ps-10 text-sm
-                        text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500
-                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
-                        dark:focus:border-blue-500 " placeholder = "<?php echo $categorie['nom_cat'] ?>" value="<?php echo $categorie['nom_cat'] ?>">
-                        <button class = "px-2  hover:text-sky-600"><a href="update.php?favori=<?php echo $favori['id_fav']?>"><i class="fa-solid fa-pen-to-square "></i></a></button>
-                    </form>
+                    <?php echo $categorie['nom_cat'] ?>
+                    <button class = "px-2  hover:text-sky-600"><a href="updatecat.php?categorie=<?php echo $categorie['id_cat']?>"><i class="fa-solid fa-pen-to-square "></i></a></button>
+                    <button class = "px-2 text-red-600 hover:text-red-800"><a href="deletecat.php?categorie=<?php echo $categorie['id_cat'] ?>">
+                    <i class="fa-solid fa-trash"></i></a></button>
                 </td>
             </tr>
 
