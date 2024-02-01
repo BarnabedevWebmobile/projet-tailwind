@@ -1,35 +1,18 @@
 <?php
     include 'head.php'
 ?>
+
 <?php
 $fav=$_GET['favori'];
 ?>
+
 <?php
     if(count($_POST)>0){
         $libelle = htmlspecialchars($_POST['libelle']);
-        $cats = array(($_POST['cats']));
+        $cats = ($_POST['cats']);
         $desc = htmlspecialchars($_POST['description']);
         $lien = htmlspecialchars($_POST['link']);
         $dom = htmlspecialchars($_POST['domaine']);
-
-        if(is_array($cats)){
-
-                ?><script> alert("pas de catégorie attribué")</script>;<?php
-            }else{
-                foreach($cats as $cat){
-                    $result2 = $pdo->prepare("DELETE FROM `cat_fav` WHERE id_fav=:fav;");
-                    $catfav = $result2->execute(array(
-                        ':fav' => $fav,
-                        ':cats' => $cat
-                    ));
-                    $result3 = $pdo->query("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) 
-                    VALUES (".$fav.",".$cat.");");
-                    $catfav = $result3->execute(array(
-                        ':fav' => $fav,
-                        ':cats' => $cat
-                    ));
-            }; 
-        }
 
         if(is_array($libelle)||is_array($lien) 
         || is_array($dom) ||is_array($desc)){
@@ -49,8 +32,28 @@ $fav=$_GET['favori'];
                 'summary' =>$desc,
             ));
 
+            if(count($cats) == 0){
+
+                ?><script> alert("pas de catégorie attribué")</script>;<?php
+            }else{
+                
+                    $result2 = $pdo->prepare("DELETE FROM `cat_fav` WHERE id_fav=:fav;");
+                    $catfav = $result2->execute(array(
+                        ':fav' => $fav
+                    ));
+                    print_r($cats);
+                    print_r($fav);
+                foreach($cats as $_key=>$cat){
+                    print_r($cat);
+                    $result3 = $pdo->prepare("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) 
+                    VALUES ( :fav,:cats);");
+                    $catfav = $result3->execute(array(
+                        ':fav' => $fav,
+                        ':cats' => $cat
+                    ));
+                }; 
+            }
         }
-        
     }
 ?>
     <header>
@@ -150,7 +153,7 @@ $fav=$_GET['favori'];
                 
 
                     <?php
-                    var_dump($favoricats);
+                    print_r($favoricats);
                     foreach($categories as $categorie){
                         $checked = '';
                         foreach($favoricats as $favoricat){
@@ -162,7 +165,7 @@ $fav=$_GET['favori'];
                             ?>
                         <span>
 
-                            <input class = "m-2" type="checkbox" name="cats[cat<?php echo $categorie['id_cat'] ?>]" 
+                            <input class = "m-2" type="checkbox" name="cats[]" 
                             id="<?php echo $categorie['nom_cat'] ?>" value = "<?php echo $categorie['id_cat'] ?>" <?php echo $checked?>>
                             <label class = "m-2" for="<?php echo $categorie['nom_cat'] ?>"><?php echo $categorie['nom_cat'] ?></label>
                         </span>
