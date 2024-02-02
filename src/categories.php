@@ -24,15 +24,17 @@
 
         }else{
 
-            // préparation de la requete SQL
+            // préparation de la requete SQL de création d'une catégorie
             $result = $pdo->prepare("INSERT INTO `categorie`(`id_cat`, `nom_cat`) VALUES ('[value-1]',:lib)");
-            // préparation de la requete SQL
+            // préparation de la requete SQLde création d'une catégorie
 
+            // execution de la requete préparée pour mettre a jour le favori
             $result->execute(array(
                 // préparation des éléments de la requete SQL
                 ':lib' => $libelle,
                 // préparation des éléments de la requete SQL
             ));
+            // execution de la requete préparée pour mettre a jour le favori
 
             // rafraichissement invisible de la page
             header('Location: categories.php');
@@ -120,8 +122,17 @@
             <!-- boutons lançant la création de la nouvelle catégorie -->
 
         </form>
+        <!-- formulaire de création d'une catégorie -->
     </section>
-<!-- formulaire de création d'une catégorie -->
+
+    <!-- retour a la page d'acceuil -->
+    <div class = "w-full flex justify-center py-6">
+        <a href="index.php"><button class = "dark:text-white my-4  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+            focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
+            dark:focus:ring-blue-800">HOME</button></a>
+
+    </div>
+    <!-- retour a la page d'acceuil -->
 
 <!--inclusion du footer de la page-->
 <?php

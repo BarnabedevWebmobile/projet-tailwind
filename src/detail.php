@@ -4,11 +4,15 @@
 ?>
 <!-- récupération du contenue du fichier head pour l'ajouter en haut de page -->
 
+    <!-- titre de la page -->
     <header>
         <h1 class="text-3xl font-bold underline Table favoris text-center py-8 dark:text-white">
             A Propos
         </h1>
     </header>
+    <!-- titre de la page -->
+
+    <!-- récupération du favoris a affiché -->
     <?php
         $result = $pdo->query("SELECT favoris.`id_fav`, `libelle`,`date_creation`,`url`,`nom_dom`,`description`,
         GROUP_CONCAT(`nom_cat` SEPARATOR \"|\") AS concat_cat
@@ -17,7 +21,9 @@
         WHERE favoris.id_fav=".$_GET['favori'].";");
         $favori = $result->fetch(PDO::FETCH_ASSOC); 
     ?>
+    <!-- récupération du favoris a affiché -->
 
+    <!-- affichage du favoris -->
     <div class="border-y-2 py-2 bg-slate-400">
         <h2 class = " text-center p-2 py-8">
             <?php echo $favori['libelle'] ?>
@@ -37,7 +43,7 @@
         <ul class = "py-4 text-center">
             catégories : 
 
-                <li><?php echo $favori['concat_cat'] ?></li>
+            <li><?php echo $favori['concat_cat'] ?></li>
 
             
         </ul>
@@ -50,9 +56,9 @@
             <i class="fa-solid fa-trash"></i></a></button>
         </p>
     </div>
+    <!-- affichage du favoris -->
 
 
-
-      <?php
+    <?php
     include 'footer.php';
     ?>
