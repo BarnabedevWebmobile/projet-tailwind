@@ -6,41 +6,48 @@
 
 <!-- création d'une nouvelle catégorie -->
     <?php
-    // n'execute pas le code au chargement de la page
-    if(count($_POST)>0){
-    // n'execute pas le code au chargement de la page
 
-    // préparation d'une variable sécuriser pour le libellé
-    $libelle = htmlspecialchars($_POST['libelle']);
-    // préparation d'une variable sécuriser pour le libellé
 
-    // vérification supplémentaire du remplissage de champs
-    if(strlen($libelle) == 0){
-    // vérification supplémentaire du remplissage de champs  
+    try{
+
+        // n'execute pas le code au chargement de la page
+        if(count($_POST)>0){
+        // n'execute pas le code au chargement de la page
+
+        // préparation d'une variable sécuriser pour le libellé
+        $libelle = htmlspecialchars($_POST['libelle']);
+        // préparation d'une variable sécuriser pour le libellé
+
+        // vérification supplémentaire du remplissage de champs
+        if(strlen($libelle) == 0){
+        // vérification supplémentaire du remplissage de champs  
         
             // alerte si champs non remplis
             ?><script> alert("champs non rempli")</script>;<?php
             // alerte si champs non remplis
 
-        }else{
+            }else{
 
-            // préparation de la requete SQL de création d'une catégorie
-            $result = $pdo->prepare("INSERT INTO `categorie`(`id_cat`, `nom_cat`) VALUES ('[value-1]',:lib)");
-            // préparation de la requete SQLde création d'une catégorie
+                // préparation de la requete SQL de création d'une catégorie
+                $result = $pdo->prepare("INSERT INTO `categorie`(`id_cat`, `nom_cat`) VALUES ('[value-1]',:lib)");
+                // préparation de la requete SQLde création d'une catégorie
 
-            // execution de la requete préparée pour mettre a jour le favori
-            $result->execute(array(
-                // préparation des éléments de la requete SQL
-                ':lib' => $libelle,
-                // préparation des éléments de la requete SQL
-            ));
-            // execution de la requete préparée pour mettre a jour le favori
+                // execution de la requete préparée pour mettre a jour le favori
+                $result->execute(array(
+                    // préparation des éléments de la requete SQL
+                    ':lib' => $libelle,
+                    // préparation des éléments de la requete SQL
+                ));
+                // execution de la requete préparée pour mettre a jour le favori
 
-            // rafraichissement invisible de la page
-            header('Location: categories.php');
-            exit();
-            // rafraichissement invisible de la page
+                // rafraichissement invisible de la page
+                header('Location: categories.php');
+                exit();
+                // rafraichissement invisible de la page
+            }
         }
+    }catch(Exception $e){
+        ?><script>alert("erreur lors de l'insertion")</script><?php
     }
     ?>
 <!-- création d'une nouvelle catégorie -->

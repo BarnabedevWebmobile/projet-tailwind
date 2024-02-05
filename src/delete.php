@@ -1,11 +1,12 @@
 <?php
+    try{
 
     // inclut le fichier PDO
     include 'pdo.php';
     // inclut le fichier PDO
 
     // variable sécurisant le get
-    $fav=$_GET['favori'];
+    $fav=htmlspecialchars($_GET['favori']);
     // variable sécurisant le get
 
     // préparation de la requete de suppression
@@ -26,4 +27,7 @@
     header('Location: index.php');
     exit();
     // redirection vers l'acceuil
+    }catch(Exception $e){
+        ?><script>alert("erreur lors de l'insertion")</script><?php
+    }
 ?>

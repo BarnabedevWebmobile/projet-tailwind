@@ -5,6 +5,9 @@
 <!-- récupération du contenue du fichier head pour l'ajouter en haut de page -->
 <!-- création d'un nouveau domaine -->
 <?php
+
+    try{
+
     // n'execute pas le code au chargement de la page
     if(count($_POST)>0){
     // n'execute pas le code au chargement de la page
@@ -41,11 +44,14 @@
             // rafraichissement invisible de la page
         }
     }
+    }catch(Exception $e){
+        ?><script>alert("erreur lors de l'insertion")</script><?php
+    }
     ?>
 <!-- création d'un nouveau domaine -->
   <!-- zone du titre -->
   <header>
-    <h1 class="text-3xl font-bold underline Table favoris text-center py-8 dark:text-white">Liste des omaines</h1>
+    <h1 class="text-3xl font-bold underline Table favoris text-center py-8 dark:text-white">Liste des domaines</h1>
   </header>
   <!-- zone du titre -->
 

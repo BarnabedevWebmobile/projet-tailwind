@@ -5,6 +5,9 @@
 <!--inclusion du head de la page-->
 
     <?php
+
+    try{
+
     // vérification supplémentaire du remplissage de champs
     if(
         isset($_POST['libelle'])
@@ -76,7 +79,10 @@
 
         }
         //  cas ou la personne a remplis le champ description
-    };    
+    };
+}catch(Exception $e){
+    ?><script>alert("erreur lors de l'insertion")</script><?php
+}   
 ?>
 
 <!-- titre de la page -->

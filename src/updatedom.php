@@ -2,21 +2,28 @@
     include 'head.php'
 ?>
     <?php
-    if(count($_POST)>0){
-    $libelle = htmlspecialchars($_POST['libelle']);
-    $iddom = $_GET['domaine'];
-    if(strlen($libelle) == 0){
-            ?><script> alert("champs non rempli")</script>;<?php
-        }else{
-            $result = $pdo->prepare("UPDATE `domaine` SET `nom_dom`= :lib WHERE id_dom=:iddom");
-            $result->execute(array(
-                ':lib' => $libelle,
-    
-                ':iddom' =>$iddom,
-            ));
-            header('Location: domaine.php');
-            exit();
+
+    try{
+
+        if(count($_POST)>0){
+        $libelle = htmlspecialchars($_POST['libelle']);
+        $iddom = $_GET['domaine'];
+        if(strlen($libelle) == 0){
+                ?><script> alert("champs non rempli")</script>;<?php
+            }else{
+                $result = $pdo->prepare("UPDATE `domaine` SET `nom_dom`= :lib WHERE id_dom=:iddom");
+                $result->execute(array(
+                    ':lib' => $libelle,
+        
+                    ':iddom' =>$iddom,
+                ));
+                header('Location: domaine.php');
+                exit();
+            }
         }
+
+    }catch(Exception $e){
+        ?><script>alert("erreur lors de l'insertion")</script><?php
     }
     ?>
 

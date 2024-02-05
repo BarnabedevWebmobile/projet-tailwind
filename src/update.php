@@ -12,97 +12,102 @@ $fav=$_GET['favori'];
 ?>
 
 <?php
-    // n'execute pas le code au chargement de la page
-    if(count($_POST)>0){
-    // n'execute pas le code au chargement de la page
-        
-        // mise en variable d'un get/post sécurité supplémentaire
-        $libelle = htmlspecialchars($_POST['libelle']);
-        $cats = ($_POST['cats']);
-        $desc = htmlspecialchars($_POST['description']);
-        $lien = htmlspecialchars($_POST['link']);
-        $dom = htmlspecialchars($_POST['domaine']);
-        // mise en variable d'un get/post sécurité supplémentaire
+    try{
 
-        // vérification supplémentaire du remplissage de champs
-        if(strlen($libelle) !== 0||strlen($lien)!==0
-        || is_numeric($dom) ||strlen($desc) !== 0){
-        // vérification supplémentaire du remplissage de champs
-
-        // alerte si champs non remplis
-            ?><script> alert("champs non rempli")</script>;<?php
-        // alerte si champs non remplis
-
-        }else{
-            // requete préparée pour mettre a jour le favori
-            $result = $pdo->prepare("UPDATE `favoris` SET `libelle`= :lib, `date_creation` = NOW(), 
-            `url`=:link, id_dom=:dom, `description`=:summary WHERE id_fav=:fav");
-            // requete préparée pour mettre a jour le favori
-
-            // execution de la requete préparée pour mettre a jour le favori
-            $result->execute(array(
-
-                // préparation des éléments de la requete SQL
-                ':lib' => $libelle,
-    
-                ':link' => $lien,
-    
-                ':dom' =>$dom,
-    
-                ':fav' =>$fav,
-    
-                'summary' =>$desc,
-                // préparation des éléments de la requete SQL
-
-            ));
-            // execution de la requete préparée pour mettre a jour le favori
+        // n'execute pas le code au chargement de la page
+        if(count($_POST)>0){
+        // n'execute pas le code au chargement de la page
+            
+            // mise en variable d'un get/post sécurité supplémentaire
+            $libelle = htmlspecialchars($_POST['libelle']);
+            $cats = ($_POST['cats']);
+            $desc = htmlspecialchars($_POST['description']);
+            $lien = htmlspecialchars($_POST['link']);
+            $dom = htmlspecialchars($_POST['domaine']);
+            // mise en variable d'un get/post sécurité supplémentaire
 
             // vérification supplémentaire du remplissage de champs
-            if(count($cats) == 0){
+            if(is_array($libelle)||is_array($lien)
+            || is_array($dom) ||is_array($desc)){
             // vérification supplémentaire du remplissage de champs
 
-                // alerte si champs non remplis
-                ?><script> alert("pas de catégorie attribué")</script>;<?php
-                // alerte si champs non remplis
+            // alerte si champs non remplis
+                ?><script> alert("champs non rempli")</script>;<?php
+            // alerte si champs non remplis
 
             }else{
-                
-                    // requete préparée pour supprimé toutes les catégories du favori
-                    $result2 = $pdo->prepare("DELETE FROM `cat_fav` WHERE id_fav=:fav;");
-                    // requete préparée pour supprimé toutes les catégories du favori
+                // requete préparée pour mettre a jour le favori
+                $result = $pdo->prepare("UPDATE `favoris` SET `libelle`= :lib, `date_creation` = NOW(), 
+                `url`=:link, id_dom=:dom, `description`=:summary WHERE id_fav=:fav");
+                // requete préparée pour mettre a jour le favori
 
-                    // execution de la requete préparée pour mettre a jour le favori
-                    $catfav = $result2->execute(array(
+                // execution de la requete préparée pour mettre a jour le favori
+                $result->execute(array(
 
-                        // préparation des éléments de la requete SQL
-                        ':fav' => $fav
-                        // préparation des éléments de la requete SQL
+                    // préparation des éléments de la requete SQL
+                    ':lib' => $libelle,
+        
+                    ':link' => $lien,
+        
+                    ':dom' =>$dom,
+        
+                    ':fav' =>$fav,
+        
+                    'summary' =>$desc,
+                    // préparation des éléments de la requete SQL
 
-                    ));
-                    // execution de la requete préparée pour mettre a jour le favori
+                ));
+                // execution de la requete préparée pour mettre a jour le favori
 
-                // vérification du nombre de checkbox coché
-                foreach($cats as $_key=>$cat){
-                // vérification du nombre de checkbox coché
+                // vérification supplémentaire du remplissage de champs
+                if(count($cats) == 0){
+                // vérification supplémentaire du remplissage de champs
 
-                    // requete préparée pour ajouter toutes les catégories du favori
-                    $result3 = $pdo->prepare("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) 
-                    VALUES ( :fav,:cats);");
-                    // requete préparée pour ajouter toutes les catégories du favori
+                    // alerte si champs non remplis
+                    ?><script> alert("pas de catégorie attribué")</script>;<?php
+                    // alerte si champs non remplis
 
-                    // execution de la requete préparée pour mettre a jour le favori
-                    $catfav = $result3->execute(array(
+                }else{
+                    
+                        // requete préparée pour supprimé toutes les catégories du favori
+                        $result2 = $pdo->prepare("DELETE FROM `cat_fav` WHERE id_fav=:fav;");
+                        // requete préparée pour supprimé toutes les catégories du favori
 
-                        // préparation des éléments de la requete SQL
-                        ':fav' => $fav,
-                        ':cats' => $cat
-                        // préparation des éléments de la requete SQL
+                        // execution de la requete préparée pour mettre a jour le favori
+                        $catfav = $result2->execute(array(
 
-                    ));
-                    // execution de la requete préparée pour mettre a jour le favori
-                }; 
+                            // préparation des éléments de la requete SQL
+                            ':fav' => $fav
+                            // préparation des éléments de la requete SQL
+
+                        ));
+                        // execution de la requete préparée pour mettre a jour le favori
+
+                    // vérification du nombre de checkbox coché
+                    foreach($cats as $_key=>$cat){
+                    // vérification du nombre de checkbox coché
+
+                        // requete préparée pour ajouter toutes les catégories du favori
+                        $result3 = $pdo->prepare("INSERT INTO `cat_fav`(`id_fav`, `id_cat`) 
+                        VALUES ( :fav,:cats);");
+                        // requete préparée pour ajouter toutes les catégories du favori
+
+                        // execution de la requete préparée pour mettre a jour le favori
+                        $catfav = $result3->execute(array(
+
+                            // préparation des éléments de la requete SQL
+                            ':fav' => $fav,
+                            ':cats' => $cat
+                            // préparation des éléments de la requete SQL
+
+                        ));
+                        // execution de la requete préparée pour mettre a jour le favori
+                    }; 
+                }
             }
         }
+    }catch(Exception $e){
+        ?><script>alert("erreur lors de l'insertion")</script><?php
     }
 ?>
 

@@ -8,6 +8,7 @@
   <!-- zone du titre -->
   <header>
     <h1 class="text-3xl font-bold underline Table favoris text-center py-8 dark:text-white">Table SQL des favoris</h1>
+    <p class = 'dark:text-white'>connect</p>
   </header>
   <!-- zone du titre -->
 
@@ -150,6 +151,7 @@
 
 
         // recherche par libellé de favoris 
+        try{
 
         if (isset($_GET['search']) 
         && $_GET['search'] !== "" ){
@@ -210,6 +212,9 @@
             }
           }        
         }
+      }catch(Exception $e){
+        ?><script>alert("erreur lors de l'insertion")</script><?php
+    }
     ?> 
     <!-- zone de filtrage -->
 
@@ -273,18 +278,18 @@
   </section>
   <!-- section prenant l'ensemble de la table -->
   <span class ="flex justify-center">
-            <a href="categories.php" class = 'my-5'><button class = "dark:text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
-            focus:ring-blue-300 font-medium rounded-lg text-sm mx-4 px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
-            dark:focus:ring-blue-800">
-            Catégories
-            </button></a>
-            <a href="domaine.php" class = 'my-5'><button class = "dark:text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
-            focus:ring-blue-300 font-medium rounded-lg text-sm mx-4 px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
-            dark:focus:ring-blue-800">
-            Domaine
-            </button></a>
-</span>
-  <!-- récupération du contenue du fichier footer pour l'ajouter en bas de page -->
-  <?php include 'footer.php' ?>
-  <!-- récupération du contenue du fichier footer pour l'ajouter en bas de page -->
+    <a href="categories.php" class = 'my-5'><button class = "dark:text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+    focus:ring-blue-300 font-medium rounded-lg text-sm mx-4 px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
+    dark:focus:ring-blue-800">
+    Catégories
+    </button></a>
+    <a href="domaine.php" class = 'my-5'><button class = "dark:text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+    focus:ring-blue-300 font-medium rounded-lg text-sm mx-4 px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
+    dark:focus:ring-blue-800">
+    Domaine
+    </button></a>
+  </span>
+<!-- récupération du contenue du fichier footer pour l'ajouter en bas de page -->
+<?php include 'footer.php' ?>
+<!-- récupération du contenue du fichier footer pour l'ajouter en bas de page -->
 

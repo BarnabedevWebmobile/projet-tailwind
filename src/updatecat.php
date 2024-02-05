@@ -2,6 +2,9 @@
     include 'head.php'
 ?>
     <?php
+
+    try{
+
     if(count($_POST)>0){
     $libelle = htmlspecialchars($_POST['libelle']);
     $idcat = $_GET['categorie'];
@@ -18,6 +21,9 @@
             exit();
         }
     }
+}catch(Exception $e){
+    ?><script>alert("erreur lors de l'insertion")</script><?php
+}
     ?>
 
     <?php

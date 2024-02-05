@@ -1,4 +1,7 @@
 <?php
+
+    try{
+
     // inclut le fichier PDO
     include 'pdo.php';
     // inclut le fichier PDO
@@ -25,5 +28,7 @@
     header('Location: domaine.php');
     exit();
     // redirection vers l'acceuil
-    
+}catch(Exception $e){
+    ?><script>alert("erreur lors de l'insertion")</script><?php
+}
 ?>
