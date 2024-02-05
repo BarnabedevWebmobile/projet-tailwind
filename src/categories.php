@@ -96,7 +96,7 @@
                 <td class = " py-2 text-center flex justify-center">
                     <?php echo $categorie['nom_cat'] ?>
                     <button class = "px-2  hover:text-sky-600"><a href="updatecat.php?categorie=<?php echo $categorie['id_cat']?>"><i class="fa-solid fa-pen-to-square "></i></a></button>
-                    <button class = "px-2 text-red-600 hover:text-red-800"><a href="deletecat.php?categorie=<?php echo $categorie['id_cat'] ?>">
+                    <button class = "px-2 text-red-600 hover:text-red-800"><a href="deletecat.php?categorie=<?php echo $categorie['id_cat'] ?>" onclick="return checkDelete()">
                     <i class="fa-solid fa-trash"></i></a></button>
                 </td>
             </tr>

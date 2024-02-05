@@ -92,7 +92,7 @@
                     <?php echo $domaine['nom_dom'] ?>
                     <button class = "px-2  hover:text-sky-600"><a href="updatedom.php?domaine=<?php echo $domaine['id_dom']?>"><i class="fa-solid fa-pen-to-square "></i></a></button>
                     <button class = "px-2 text-red-600 hover:text-red-800">
-                        <a href="deletedom.php?domaine=<?php echo $domaine['id_dom'] ?>">
+                        <a href="deletedom.php?domaine=<?php echo $domaine['id_dom'] ?>" onclick="return checkDelete()">
                     <i class="fa-solid fa-trash"></i></a></button>
                 </td>
             </tr>

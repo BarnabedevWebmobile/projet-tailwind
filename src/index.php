@@ -259,7 +259,7 @@
             <button class = "px-2  hover:text-sky-600"><a href="update.php?favori=<?php echo $favori['id_fav']?>"><i class="fa-solid fa-pen-to-square "></i></a></button>
             
             <!-- pictogramme de la supression du favoris -->
-            <button class = "px-2 text-red-600 hover:text-red-800"><a href="confirm.php?favori=<?php echo $favori['id_fav'] ?>">
+            <button class = "px-2 text-red-600 hover:text-red-800"><a href="delete.php?favori=<?php echo $favori['id_fav'] ?>" onclick="return checkDelete()">
             <i class="fa-solid fa-trash"></i></a></button>
           </td>
       </tr>

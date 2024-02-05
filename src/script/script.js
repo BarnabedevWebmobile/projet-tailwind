@@ -1,3 +1,3 @@
-function alerte(){
-    alert('champs obligatoire non rempli')
+function checkDelete(){
+    return confirm('Are you sure?');
 }
