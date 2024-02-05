@@ -274,9 +274,14 @@
   <!-- section prenant l'ensemble de la table -->
   <span class ="flex justify-center">
             <a href="categories.php" class = 'my-5'><button class = "dark:text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
-            focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
+            focus:ring-blue-300 font-medium rounded-lg text-sm mx-4 px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
             dark:focus:ring-blue-800">
-            catégories
+            Catégories
+            </button></a>
+            <a href="domaine.php" class = 'my-5'><button class = "dark:text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+            focus:ring-blue-300 font-medium rounded-lg text-sm mx-4 px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
+            dark:focus:ring-blue-800">
+            Domaine
             </button></a>
 </span>
   <!-- récupération du contenue du fichier footer pour l'ajouter en bas de page -->
