@@ -8,7 +8,6 @@
   <!-- zone du titre -->
   <header>
     <h1 class="text-3xl font-bold underline Table favoris text-center py-8 dark:text-white">Table SQL des favoris</h1>
-    <p class = 'dark:text-white'>connect</p>
   </header>
   <!-- zone du titre -->
 
