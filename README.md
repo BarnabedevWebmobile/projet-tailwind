@@ -7,6 +7,7 @@ avec l'objectif d'afficher un tableau basé sur la base de donnée precedemment 
 
 - la découverte de tailwind;
 - la préparation du briefs exploitant la base de données;
+- filtrage permettant de chercher précisément un ou plusieur bookmark
 
 # brief partie 2 - la page bookmarks
 
@@ -20,6 +21,13 @@ avec l'objectif d'afficher un tableau basé sur la base de donnée precedemment 
 - la requete delete = pouvoir supprimé un bookmark rapidement
 - la requete insert = créer facilement un nouveau bookmark
 - la requete update = pouvoir modifier facilement toutes les données d'un bookmark
+- update = possibilité de retirer et d'ajouter des catégories
+- update = remplissage auto des formulaires
+- update = les checkbox des catégories sont préremplis
+
+- input = l'input des liens n'accepte que des url
+- input = impossible de rendre les inputs du libellé et de l'url vide
+- input = possibilité de ne pas renseigner la description
 
 ### les pages supplémentaire 
 
